@@ -1,25 +1,26 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { View, Image, Text, StyleSheet, Dimensions, SafeAreaView, Platform, StatusBar } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import home_icon from './assets/tabicons/numeric-1.png';
 
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+  <View style={[styles.scene, { backgroundColor: 'white' }]} />
 );
 
 const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#white' }]} />
 );
 
 const TerceiraRota = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#white' }]} />
 );
 
 const QuartaRota = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#white' }]} />
 );
 
 const QuintaRota = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+  <View style={[styles.scene, { backgroundColor: '#white' }]} />
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
@@ -27,11 +28,11 @@ const initialLayout = { width: Dimensions.get('window').width };
 export default function TabViewExample() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'Primeira', icon: 'num1' },
-    { key: 'second', title: 'Segunda' },
-    { key: 'terceira', title: 'Terceira' },
-    { key: 'quarta', title: 'Quarta' },
-    { key: 'quinta', title: 'Quinta' },
+    { key: 'first', title: 'PRIMEIRA', icon: require('./assets/tabicons/numeric-1.png') },
+    { key: 'second', title: 'SEGUNDA', icon: require('./assets/tabicons/numeric-2.png') },
+    { key: 'terceira', title: 'TERCEIRA', icon: require('./assets/tabicons/numeric-3.png') },
+    { key: 'quarta', title: 'QUARTA', icon: require('./assets/tabicons/numeric-4.png') },
+    { key: 'quinta', title: 'QUINTA', icon: require('./assets/tabicons/numeric-5.png') },
 
   ]);
 
@@ -50,12 +51,15 @@ export default function TabViewExample() {
       style={{ backgroundColor: 'white' }}
       labelStyle={{ color: 'black' }}
       scrollEnabled={true}
-    />
+      renderIcon={({ route }) => ( <Image style={styles.topbaricon} source={route.icon} /> )}
+      renderLabel={({ route }) => ( <Text style={styles.topbartext}> {route.title} </Text> )}
+          />
   );
   
   return (
     <SafeAreaView style={styles.container}>
     <TabView
+    
      renderTabBar={renderTabBar}
       navigationState={{ index, routes }}
       renderScene={renderScene}
@@ -80,4 +84,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
+  topbaricon: {
+    backgroundColor: "white",
+    width: 30,
+    height: 30,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  topbartext: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
 });
